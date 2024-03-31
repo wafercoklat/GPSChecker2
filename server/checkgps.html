@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMI - Notification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Fix map height */
+        #map {
+            height: 500px;
+        }
+
+        /* Make lists scrollable and decrease font size */
+        .list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 14px; 
+            padding: 5px; 
+        }
+
+        /* Decrease font size and padding for headers */
+        h2 {
+            font-size: 1.5rem; 
+            margin-top: 0; 
+            margin-bottom: 15px; 
+        }
+
+        /* Decrease font size and padding for search inputs */
+        .search-input {
+            font-size: 14px; 
+            padding: 5px; 
+        }
+
+        /* Change cursor to pointer for clickable items */
+        .list-group-item {
+            cursor: pointer;
+        }
+
+        .custom-icon {
+            text-align: center;
+        }
+
+        .vehicle-icon-red{
+            width: 100%;
+            height: 100%;
+            background-image: url('./icon/icon-red.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: 2px solid transparent; 
+        }
+
+        .vehicle-icon-green{
+            width: 100%;
+            height: 100%;
+            background-image: url('./icon/icon-green.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: 2px solid transparent; 
+        }
+
+        .vehicle-icon.red {
+            border-color: red; 
+        }
+
+        .vehicle-icon.selected {
+            border-color: red; 
+        }
+
+        /* Style for red list items */
+        .list-group-item.red {
+            background-color: #f2476a;
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Sidebar for Vehicle List -->
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <h2>Vehicle List</h2>
+                    <div class="d-flex mb-3">
+                        <input type="text" id="vehicleSearchInput" class="form-control mr-2 search-input" placeholder="Search Vehicles...">
+                        <div class="flex-grow-2 col-4">
+                            <select id="vehicleFilterSelect" class="form-control">
+                                <option value="all">Semua Lokasi</option>
+                                <option value="MDN">MDN</option>
+                                <option value="JKT">JKT</option>
+                                <option value="SBY">SBY</option>
+                                <option value="KLM">KLM</option>
+                            </select>
+                        </div>
+                        <div class="flex-grow-2 col-4">
+                            <select id="vehicleFilterSelect2" class="form-control">
+                                <option value="all">All Status</option>
+                                <option value="Parking Idle">Parking Idle</option>
+                                <option value="Out Route">Out Route</option>
+                                <option value="On Job">On Job</option>
+                                <option value="In Garage">In Garage</option>
+                                <option value="In Destination">In Destination</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="vehicleList" class="list-group list-container">
+                    </div>
+                </div>
+
+                <!-- Tab navigation for Geofence and Route Lists -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="geofence-tab" data-toggle="tab" href="#geofence" role="tab" aria-controls="geofence" aria-selected="true">News Feed List</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <!-- Geofence List -->
+                    <div class="tab-pane fade show active" id="geofence" role="tabpanel" aria-labelledby="geofence-tab">
+                        <input type="text" id="geofenceSearchInput" class="form-control mb-3 search-input" placeholder="Search News Feed...">
+                        <div id="geofenceList" class="list-group list-container">
+                            <!-- Geofences will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar for Map -->
+            <div class="col-lg-8">
+                <h2>Map</h2>
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Custom JS -->
+    <script src="./js/app.js"></script>
+
+</body>
+</html>
